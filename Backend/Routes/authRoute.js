@@ -1,7 +1,20 @@
 import express from "express";
-import { RegisterController } from "../Controllers/authcontroller.js";
+import {
+  LoginController,
+  RegisterController,
+  testController,
+} from "../Controllers/authcontroller.js";
+import { isadmin, requireSign } from "../Middleware/authMiddleware.js";
+
+//router
 const authrouter = express.Router();
 
+//regiter request || POST method
 authrouter.post("/api/v1/register", RegisterController);
 
+//Login request || POST METHOD
+authrouter.post("/api/v1/login", LoginController);
+
+//test route
+authrouter.get("/test", requireSign, isadmin, testController);
 export default authrouter;
