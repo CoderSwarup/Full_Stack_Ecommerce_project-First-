@@ -10,10 +10,10 @@ import { isadmin, requireSign } from "../Middleware/authMiddleware.js";
 const authrouter = express.Router();
 
 //regiter request || POST method
-authrouter.post("/api/v1/register", RegisterController);
+authrouter.post("/register", RegisterController);
 
 //Login request || POST METHOD
-authrouter.post("/api/v1/login", LoginController);
+authrouter.post("/login", LoginController);
 
 //test route
 authrouter.get("/test", requireSign, isadmin, testController);

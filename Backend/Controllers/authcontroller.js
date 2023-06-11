@@ -9,11 +9,11 @@ const RegisterController = async (req, res) => {
     const { username, email, password, phone, address } = req.body;
 
     //validation
-    if (!username) return res.send({ error: "Username is Required" });
-    if (!email) return res.send({ error: "email is Required" });
-    if (!password) return res.send({ error: "password is Required" });
-    if (!phone) return res.send({ error: "phone Number is Required" });
-    if (!address) return res.send({ error: "Address is Required" });
+    if (!username) return res.send({ message: "Username is Required" });
+    if (!email) return res.send({ message: "email is Required" });
+    if (!password) return res.send({ message: "password is Required" });
+    if (!phone) return res.send({ message: "phone Number is Required" });
+    if (!address) return res.send({ message: "Address is Required" });
 
     //check existing user
     const existinguser = await userModel.findOne({ email });
@@ -86,7 +86,7 @@ const LoginController = async (req, res) => {
     if (!Matchpasswd) {
       return res.status(200).send({
         success: false,
-        message: "Invalid Password ",
+        message: "Invalid Email OR Password ",
       });
     }
 

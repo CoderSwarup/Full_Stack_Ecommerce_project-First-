@@ -66,6 +66,7 @@ const Nav = styled.nav`
       list-style: none;
       transition: all 0.4s ease;
       border-bottom: 2px solid transparent;
+      letter-spacing: 0.9px;
       padding: 2px 0;
       &:hover,
       &:visited {

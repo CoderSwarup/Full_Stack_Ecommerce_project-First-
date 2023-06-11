@@ -4,7 +4,6 @@ import Connect from "./Config/DB.js"; //database connection
 //morgan middleware
 import morgan from "morgan";
 import authrouter from "./Routes/authRoute.js";
-
 const app = express();
 
 //configure env
@@ -21,7 +20,7 @@ app.use(morgan("dev"));
 Connect();
 
 //routes
-app.use(authrouter);
+app.use("/api/v1", authrouter);
 
 //rest api
 app.get("/", (req, res) => {

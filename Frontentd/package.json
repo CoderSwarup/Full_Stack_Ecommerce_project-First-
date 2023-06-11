@@ -1,5 +1,6 @@
 {
   "name": "frontentd",
+  "proxy": "http://localhost:4000/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,6 +13,8 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.12.1",
     "styled-components": "^6.0.0-rc.3"
   },
