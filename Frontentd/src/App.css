@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inconsolata:wght@400;500;600;900&family=Roboto:ital,wght@0,700;0,900;1,500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Font Family 
+font-family: 'IBM Plex Sans', sans-serif;
+font-family: 'Inconsolata', monospace;
+font-family: 'Roboto', sans-serif;
+
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+p {
+  font-family: "Inconsolata", monospace;
+}
