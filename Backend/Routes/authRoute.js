@@ -17,4 +17,9 @@ authrouter.post("/login", LoginController);
 
 //test route
 authrouter.get("/test", requireSign, isadmin, testController);
+
+//Protected Route auth
+authrouter.get("/user-auth", requireSign, (req, res) => {
+  res.status(200).send({ ok: true });
+});
 export default authrouter;

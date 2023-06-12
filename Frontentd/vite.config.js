@@ -21,6 +21,7 @@ export default defineConfig({
       // },
       "/api/v1/register": "http://localhost:4000", // the address that u serve in the backend
       "/api/v1/login": "http://localhost:4000",
+      "/api/v1/user-auth": "http://localhost:4000",
     },
   },
 });

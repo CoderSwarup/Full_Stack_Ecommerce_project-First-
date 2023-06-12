@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
-import { useAuth } from "../Context/authContext";
+import { useAuth } from "../Context/AuthContext";
 import toast from "react-hot-toast";
 export default function Navbar() {
   const [auth, setauth] = useAuth();

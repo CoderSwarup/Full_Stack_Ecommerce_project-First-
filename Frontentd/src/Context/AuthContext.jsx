@@ -20,6 +20,9 @@ const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  //   all multiple time running problem slove using the following at the last useEffect
+  // eslint-disable-next-line
+
   return (
     <AuthContext.Provider value={[auth, setauth]}>
       {children}
