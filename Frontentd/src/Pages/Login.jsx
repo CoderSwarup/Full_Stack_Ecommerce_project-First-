@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import toast from "react-hot-toast";
+import { useAuth } from "../Context/authContext";
 
 export default function Login() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const Navigate = useNavigate();
+
+  const [auth, setauth] = useAuth();
 
   const LoginHandler = (e) => {
     e.preventDefault();
@@ -28,6 +31,16 @@ export default function Login() {
         // console.log(d);
         if (d.success) {
           toast.success(d.message);
+
+          //Get the login user Data And Token to store into the data base
+          setauth({
+            ...auth,
+            user: d.user,
+            token: d.token,
+          });
+
+          //store the data into local storage
+          localStorage.setItem("auth", JSON.stringify(d));
           //   console.log(d);
           Navigate("/");
         } else {

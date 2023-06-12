@@ -1,6 +1,5 @@
 import React from "react";
 import SEO from "../Components/SEO";
-
 export default function About() {
   return (
     <>

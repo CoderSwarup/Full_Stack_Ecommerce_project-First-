@@ -1,8 +1,21 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
-
+import { useAuth } from "../Context/authContext";
+import toast from "react-hot-toast";
 export default function Navbar() {
+  const [auth, setauth] = useAuth();
+
+  const handlerLogout = () => {
+    setauth({
+      ...auth,
+      user: null,
+      token: "",
+    });
+    localStorage.removeItem("auth");
+    toast.success("Logout Successfully");
+  };
+
   return (
     <Nav>
       <div className="logo">
@@ -24,13 +37,34 @@ export default function Navbar() {
           <li>Contact</li>
         </NavLink>
 
-        <NavLink style={{ textDecoration: "none" }} to="/login" className="li">
-          <li>Login</li>
-        </NavLink>
+        {!auth.user ? (
+          <>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to="/login"
+              className="li"
+            >
+              <li>Login</li>
+            </NavLink>
 
-        <NavLink style={{ textDecoration: "none" }} to="/signup" className="li">
-          <li>SignUP</li>
-        </NavLink>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to="/signup"
+              className="li"
+            >
+              <li>SignUP</li>
+            </NavLink>
+          </>
+        ) : (
+          <NavLink
+            onClick={handlerLogout}
+            style={{ textDecoration: "none" }}
+            to="/login"
+            className="li"
+          >
+            <li>LogOut</li>
+          </NavLink>
+        )}
         <NavLink style={{ textDecoration: "none" }} to="/cart" className="li">
           <li> Cart</li>
         </NavLink>
