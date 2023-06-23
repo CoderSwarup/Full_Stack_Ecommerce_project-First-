@@ -6,13 +6,14 @@ import JWT from "jsonwebtoken";
 
 const RegisterController = async (req, res) => {
   try {
-    const { username, email, password, phone, address } = req.body;
+    const { username, email, password, phone, answer, address } = req.body;
 
     //validation
     if (!username) return res.send({ message: "Username is Required" });
     if (!email) return res.send({ message: "email is Required" });
     if (!password) return res.send({ message: "password is Required" });
     if (!phone) return res.send({ message: "phone Number is Required" });
+    if (!answer) return res.send({ message: "Answer is Required" });
     if (!address) return res.send({ message: "Address is Required" });
 
     //check existing user
@@ -36,6 +37,7 @@ const RegisterController = async (req, res) => {
       email,
       password: haspasswd,
       phone,
+      answer,
       address,
     }).save();
 
@@ -104,6 +106,7 @@ const LoginController = async (req, res) => {
         email: user.email,
         phone: user.phone,
         address: user.address,
+        role: user.role,
       },
       token,
     });
@@ -117,9 +120,55 @@ const LoginController = async (req, res) => {
   }
 };
 
+//Forgotpassword Controller
+
+const ForgotpasswdController = async (req, res) => {
+  try {
+    const { email, answer, newpassword } = req.body;
+
+    //validation
+    if (!email) return res.send({ message: "email is Required" });
+    if (!answer) return res.send({ message: "Answer is Required" });
+    if (!newpassword) return res.send({ message: "New Password is Required" });
+
+    //check user
+    const user = await userModel.findOne({ email, answer });
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "Wrong Email Or Answer",
+      });
+    }
+
+    const hashpasswd = await hashPassword(newpassword);
+
+    //update a password
+    await userModel.findByIdAndUpdate(user._id, { password: hashpasswd });
+
+    res.status(200).send({
+      success: true,
+      message: "Password is Successfully Updated",
+    });
+
+    //alldone
+  } catch (error) {
+    console.log("error");
+    res.status(500).send({
+      success: false,
+      message: "Something Went Wrong Please Try Again",
+      error,
+    });
+  }
+};
+
 //testController
 
 const testController = (req, res) => {
   res.send("protected route");
 };
-export { RegisterController, LoginController, testController };
+export {
+  RegisterController,
+  LoginController,
+  testController,
+  ForgotpasswdController,
+};

@@ -12,19 +12,21 @@ export default function Private() {
   const location = useLocation();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setcount((prev) => {
-        return --prev;
-      });
-
-      count == 0 &&
-        Navigate("/login", {
-          state: location.pathname,
+    if (ok == false) {
+      const interval = setInterval(() => {
+        setcount((prev) => {
+          return --prev;
         });
 
-      return clearInterval(interval);
-    }, 1000);
-  }, [count, Navigate, location]);
+        count == 0 &&
+          Navigate("/login", {
+            state: location.pathname,
+          });
+
+        return clearInterval(interval);
+      }, 1000);
+    }
+  }, [count, Navigate, location, auth]);
 
   useEffect(() => {
     const authcheck = async () => {

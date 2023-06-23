@@ -8,6 +8,7 @@ export default function SignUP() {
   const [password, setpassword] = useState("");
   const [phone, setphone] = useState("");
   const [address, setaddress] = useState("");
+  const [answer, setanswer] = useState("");
   const Navigate = useNavigate();
 
   // tostify message
@@ -25,6 +26,7 @@ export default function SignUP() {
         email: email,
         password: password,
         phone: phone,
+        answer: answer,
         address: address,
       }),
     })
@@ -47,6 +49,7 @@ export default function SignUP() {
       <Wrapper>
         <div className="formcontainer">
           <form>
+            <h2>Sign UP </h2>
             <div className="mydiv">
               <label htmlFor="name">Name</label>
               <input
@@ -105,6 +108,20 @@ export default function SignUP() {
               />
             </div>
             <div className="mydiv">
+              <label className="ans" htmlFor="answer">
+                What is Your Favourite Language?
+              </label>
+              <input
+                type="text"
+                name="answer"
+                id="answer"
+                placeholder="Enter Your Answer"
+                onChange={(event) => setanswer(event.target.value)}
+                value={answer}
+              />
+              <p className="anstext">Help For Forgot password</p>
+            </div>
+            <div className="mydiv">
               <input
                 type="submit"
                 value="Register"
@@ -141,6 +158,11 @@ const Wrapper = styled.div`
     width: 290px;
     border-radius: 10px;
 
+    h2 {
+      text-align: center;
+      color: #ff7722;
+    }
+
     .mydiv {
       margin: 18px 0;
       width: 250px;
@@ -148,6 +170,14 @@ const Wrapper = styled.div`
       label {
         display: block;
         font-size: 18px;
+      }
+      .ans {
+        font-size: 14px;
+      }
+      .anstext {
+        margin-top: 3px;
+        font-size: 10px;
+        text-align: right;
       }
       input {
         width: 100%;

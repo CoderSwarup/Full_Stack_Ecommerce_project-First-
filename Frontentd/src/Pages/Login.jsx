@@ -52,6 +52,7 @@ export default function Login() {
     <Wrapper>
       <div className="formcontainer">
         <form action="">
+          <h2>Login Form</h2>
           <div className="mydiv">
             <label htmlFor="email">Email</label>
             <input
@@ -74,6 +75,9 @@ export default function Login() {
               onChange={(e) => setpassword(e.target.value)}
               value={password}
             />
+            <p className="anstext" onClick={() => Navigate("/forgotpassword")}>
+              Forgot password
+            </p>
           </div>
           <div className="mydiv">
             <input
@@ -109,6 +113,11 @@ const Wrapper = styled.div`
     align-items: center;
     width: 280px;
 
+    h2 {
+      text-align: center;
+      color: #ff7722;
+    }
+
     .mydiv {
       margin: 18px 0;
       width: 250px;
@@ -116,6 +125,13 @@ const Wrapper = styled.div`
       label {
         display: block;
         font-size: 17px;
+      }
+      .anstext {
+        margin-top: 3px;
+        font-size: 13px;
+        text-align: right;
+        color: #0a0a0a;
+        cursor: pointer;
       }
       input {
         width: 100%;
