@@ -5,6 +5,7 @@ import Connect from "./Config/DB.js"; //database connection
 import morgan from "morgan";
 import authrouter from "./Routes/authRoute.js";
 import categoryrouter from "./Routes/categoryroute.js";
+import ProductRouter from "./Routes/ProductRoutes.js";
 const app = express();
 
 //configure env
@@ -23,6 +24,7 @@ Connect();
 //routes
 app.use("/api/v1", authrouter);
 app.use("/api/v1/category", categoryrouter);
+app.use("/api/v1/products", ProductRouter);
 
 //rest api
 app.get("/", (req, res) => {
