@@ -4,6 +4,7 @@ import Connect from "./Config/DB.js"; //database connection
 //morgan middleware
 import morgan from "morgan";
 import authrouter from "./Routes/authRoute.js";
+import categoryrouter from "./Routes/categoryroute.js";
 const app = express();
 
 //configure env
@@ -21,6 +22,7 @@ Connect();
 
 //routes
 app.use("/api/v1", authrouter);
+app.use("/api/v1/category", categoryrouter);
 
 //rest api
 app.get("/", (req, res) => {
