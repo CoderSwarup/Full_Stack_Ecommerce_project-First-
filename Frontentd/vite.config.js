@@ -24,6 +24,10 @@ export default defineConfig({
       "/api/v1/user-auth": "http://localhost:4000",
       "/api/v1/forgotpassword": "http://localhost:4000",
       "/api/v1/admin-auth": "http://localhost:4000",
+      "/api/v1/category/get-category": "http://localhost:4000",
+      "/api/v1/category/create-category": "http://localhost:4000",
+      "/api/v1/category/update-category": "http://localhost:4000",
+      "/api/v1/category/delete-category": "http://localhost:4000",
     },
   },
 });

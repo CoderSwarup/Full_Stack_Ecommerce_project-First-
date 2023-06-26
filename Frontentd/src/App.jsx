@@ -17,7 +17,7 @@ import AdminRoute from "./Components/Routes/AdminRoute";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import Profile from "./Pages/User/Profile";
 import Order from "./Pages/User/Order";
-import CreateCategory from "./Pages/Admin/CreateCategory";
+import CreateCategory from "./Pages/Admin/Category/CreateCategory";
 import CreateProducts from "./Pages/Admin/CreateProducts";
 import AdminUsers from "./Pages/Admin/AdminUsers";
 function App() {
