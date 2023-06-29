@@ -1,52 +1,72 @@
 import express from "express";
-import { requireSign, isadmin } from "../Middleware/authMiddleware.js";
+// import {
+//   createProductcontroller,
+//   getproductcontroller,
+// } from "../Controllers/productController.js";
+import { isadmin, requireSign } from "../Middleware/authMiddleware.js";
+
 import {
-  CreateProductController,
-  deleteproductcontroller,
-  getproducts,
-  getsingleproducts,
-  productphotoController,
-  updateProdcutController,
-} from "../Controllers/productController.js";
-import formidable from "express-formidable";
-import { updatecategorycontroller } from "../Controllers/categorycontroller.js";
+  DeleteDroductController,
+  GetProducts,
+  GetSingleproducts,
+  ProductPhotoController,
+  UpdateProdcutController,
+  newCreateProductController,
+} from "../Controllers/NewProductController.js";
+import multer from "multer";
+
+const upload = multer({
+  limits: { fileSize: 1024 * 1024 }, // 1MB
+});
 const ProductRouter = express.Router();
 
-//create  product api
+// ProductRouter.post(
+//   "/create-product",
+//   requireSign,
+//   isadmin,
+//   upload.single("image"),
+//   createProductcontroller
+// );
+
+// ProductRouter.get("/get-products", getproductcontroller);
+
+//create a product
 ProductRouter.post(
   "/create-product",
   requireSign,
   isadmin,
-  formidable(),
-  CreateProductController
+  upload.single("image"),
+  newCreateProductController
 );
 
-//get all products
-ProductRouter.get("/get-product", getproducts);
+// get products Cntroller
 
-//single product
+ProductRouter.get("/get-products", GetProducts);
 
-ProductRouter.get("/single-product/:slug", getsingleproducts);
+// get Photo controller
 
-//get photo
-ProductRouter.get("/product-photo/:id", productphotoController);
+ProductRouter.get("/product-img/:id", ProductPhotoController);
 
-//delete product
+//get Single Product
+
+ProductRouter.get("/single-product/:slug", GetSingleproducts);
+
+//Update Product Route
+ProductRouter.put(
+  "/update-product/:id",
+  requireSign,
+  isadmin,
+  upload.single("image"),
+  UpdateProdcutController
+);
+
+//Delete A product
 
 ProductRouter.delete(
   "/delete-product/:id",
   requireSign,
   isadmin,
-  deleteproductcontroller
-);
-
-// update Product
-ProductRouter.put(
-  "/update-product/:id",
-  requireSign,
-  isadmin,
-  formidable(),
-  updateProdcutController
+  DeleteDroductController
 );
 
 export default ProductRouter;

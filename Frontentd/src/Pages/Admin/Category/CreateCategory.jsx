@@ -15,6 +15,7 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     borderRadius: "10px",
+    border: "2px solid orange",
   },
 };
 
@@ -61,6 +62,7 @@ export default function CreateCategory() {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+
         Authorization: auth.token,
       },
       body: JSON.stringify({

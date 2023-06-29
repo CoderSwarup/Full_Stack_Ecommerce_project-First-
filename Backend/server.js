@@ -6,6 +6,7 @@ import morgan from "morgan";
 import authrouter from "./Routes/authRoute.js";
 import categoryrouter from "./Routes/categoryroute.js";
 import ProductRouter from "./Routes/ProductRoutes.js";
+
 const app = express();
 
 //configure env

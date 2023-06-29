@@ -7,8 +7,9 @@ export default function AdminMenu({ children }) {
   const [btnno, setbtnno] = useState(0);
   const btnlist = [
     { no: 1, src: "create-category", name: "Create Category" },
-    { no: 2, src: "create-productes", name: "Create Productes" },
-    { no: 3, src: "users", name: "Users" },
+    { no: 2, src: "create-products", name: "Create Products" },
+    { no: 3, src: "products", name: "Products" },
+    { no: 4, src: "users", name: "Users" },
   ];
 
   const setBtnNo = (no) => {
@@ -87,6 +88,10 @@ const Menu = styled.div`
     font-size: 18px;
     font-weight: 600;
   } */
+
+  .left {
+    width: 60%;
+  }
 `;
 
 const DashRight = styled.div`

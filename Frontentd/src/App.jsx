@@ -18,8 +18,11 @@ import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import Profile from "./Pages/User/Profile";
 import Order from "./Pages/User/Order";
 import CreateCategory from "./Pages/Admin/Category/CreateCategory";
-import CreateProducts from "./Pages/Admin/CreateProducts";
 import AdminUsers from "./Pages/Admin/AdminUsers";
+
+import CreateProducts from "./Pages/Admin/Products/CreateProducts";
+import Products from "./Pages/Admin/Products/Products";
+import UpdateProduct from "./Pages/Admin/Products/UpdateProduct";
 function App() {
   const [auth, setauth] = useAuth();
 
@@ -57,11 +60,16 @@ function App() {
                 ></Route>
                 <Route
                   path="create-category"
-                  element={<CreateCategory></CreateCategory>}
+                  element={<CreateCategory />}
                 ></Route>
                 <Route
-                  path="create-productes"
+                  path="create-products"
                   element={<CreateProducts></CreateProducts>}
+                ></Route>
+                <Route path="products" element={<Products></Products>}></Route>
+                <Route
+                  path="update-products/:slug"
+                  element={<UpdateProduct></UpdateProduct>}
                 ></Route>
                 <Route path="users" element={<AdminUsers></AdminUsers>}></Route>
               </Route>

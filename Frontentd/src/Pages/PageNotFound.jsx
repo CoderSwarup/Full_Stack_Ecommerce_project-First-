@@ -4,7 +4,7 @@ export default function PageNotFound() {
   return (
     <Wrapper>
       <img src="./image/error.svg" alt="" />
-      <h1>GO BACK</h1>
+      <h1>GO BACK </h1>
     </Wrapper>
   );
 }
