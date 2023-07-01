@@ -35,6 +35,11 @@ export default defineConfig({
       "/api/v1/products/single-product": "http://localhost:4000",
       "/api/v1/products/update-product": "http://localhost:4000",
       "/api/v1/products/delete-product": "http://localhost:4000",
+      "/api/v1/products/product-filters": "http://localhost:4000",
+      "/api/v1/products/product-count": "http://localhost:4000",
+      "/api/v1/products/product-page": "http://localhost:4000",
+      "/api/v1/products/search": "http://localhost:4000",
+      "/api/v1/products/related-product": "http://localhost:4000",
     },
   },
 });

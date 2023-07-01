@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import AdminMenu from "../../../Components/AdminMenu";
 import { styled } from "styled-components";
-import { useAuth } from "../../../Context/AuthContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../Context/authContext";
 export default function CreateProducts() {
   const Navigate = useNavigate();
   const [auth] = useAuth();

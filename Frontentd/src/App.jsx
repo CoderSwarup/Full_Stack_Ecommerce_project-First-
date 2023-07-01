@@ -23,6 +23,8 @@ import AdminUsers from "./Pages/Admin/AdminUsers";
 import CreateProducts from "./Pages/Admin/Products/CreateProducts";
 import Products from "./Pages/Admin/Products/Products";
 import UpdateProduct from "./Pages/Admin/Products/UpdateProduct";
+import SearchPage from "./Pages/SearchPage";
+import ProductsDetails from "./Pages/ProductsDetails";
 function App() {
   const [auth, setauth] = useAuth();
 
@@ -34,6 +36,8 @@ function App() {
         <Navbar></Navbar>
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/product/:slug" element={<ProductsDetails />}></Route>
+          <Route path="/search" element={<SearchPage></SearchPage>}></Route>
 
           {auth?.user?.role == 0 ? (
             <>

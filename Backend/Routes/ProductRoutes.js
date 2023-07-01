@@ -9,7 +9,12 @@ import {
   DeleteDroductController,
   GetProducts,
   GetSingleproducts,
+  ProductCountController,
+  ProductFilterController,
+  ProductPageController,
   ProductPhotoController,
+  RelatedPrductController,
+  SearchProductController,
   UpdateProdcutController,
   newCreateProductController,
 } from "../Controllers/NewProductController.js";
@@ -68,5 +73,21 @@ ProductRouter.delete(
   isadmin,
   DeleteDroductController
 );
+
+//filter Product
+ProductRouter.post("/product-filters", ProductFilterController);
+
+// Product count
+
+ProductRouter.get("/product-count", ProductCountController);
+
+//page list product
+ProductRouter.get("/product-page/:page", ProductPageController);
+
+//search Prduct
+ProductRouter.get("/search/:keyword", SearchProductController);
+
+//Related Prduct
+ProductRouter.get("/related-product/:pid/:catid", RelatedPrductController);
 
 export default ProductRouter;

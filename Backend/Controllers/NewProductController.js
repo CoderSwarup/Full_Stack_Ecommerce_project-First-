@@ -268,3 +268,129 @@ export const DeleteDroductController = async (req, res) => {
     });
   }
 };
+
+//filters controller
+
+export const ProductFilterController = async (req, res) => {
+  try {
+    const { checked, radio } = req.body;
+    let args = {};
+    if (checked?.length > 0) args.category = checked;
+    if (radio?.length) args.price = { $gte: radio[0], $lte: radio[1] };
+
+    const products = await NewProductModelModel.find(args).select("-photo");
+    // console.log(products);
+    res.status(200).send({
+      success: true,
+      products,
+    });
+  } catch (error) {
+    // console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error In Filtering Product",
+      error,
+    });
+  }
+};
+
+//product count
+
+export const ProductCountController = async (req, res) => {
+  try {
+    const Productstotal = await NewProductModelModel.find(
+      {}
+    ).estimatedDocumentCount();
+    return res.status(200).send({
+      success: true,
+      total: Productstotal,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Error In Product Count",
+      error,
+    });
+  }
+};
+
+// product pages
+export const ProductPageController = async (req, res) => {
+  try {
+    const perpage = 6;
+    const page = req.params.page ? req.params.page : 1;
+    const products = await NewProductModelModel.find({})
+      .select("-photo")
+      .skip((page - 1) * perpage)
+      .limit(perpage)
+      .sort({ createdAt: -1 });
+
+    return res.status(200).send({
+      success: true,
+      products,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Error In Product Pages Get",
+      error,
+    });
+  }
+};
+
+//Search product
+
+export const SearchProductController = async (req, res) => {
+  try {
+    const { keyword } = req.params;
+    console.log(keyword);
+    const product = await NewProductModelModel.find({
+      $or: [
+        { name: { $regex: keyword } },
+        { description: { $regex: keyword } },
+      ],
+    }).select("-photo -photo_type");
+    res.send({ product });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error In Product Searching",
+      error,
+    });
+  }
+};
+
+// Related Products
+
+export const RelatedPrductController = async (req, res) => {
+  try {
+    const { pid, catid } = req.params;
+
+    if (!pid || !catid) {
+      throw new Error("Invalid pid or catid");
+    }
+
+    const relatedProducts = await NewProductModelModel.find({
+      category: catid,
+      _id: {
+        $ne: pid,
+      },
+    }).select("-photo");
+
+    res.status(200).send({
+      success: true,
+      message: "Related Products Found",
+      products: relatedProducts,
+    });
+
+    // console.log(relatedProducts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error While Fetching Related Products",
+      error: error.message,
+    });
+  }
+};

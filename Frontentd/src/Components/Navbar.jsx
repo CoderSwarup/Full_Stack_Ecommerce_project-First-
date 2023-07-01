@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 import { useAuth } from "../Context/AuthContext";
 import toast from "react-hot-toast";
+import SearchInput from "./SearchInput";
 export default function Navbar() {
   const [auth, setauth] = useAuth();
 
@@ -22,6 +23,7 @@ export default function Navbar() {
         <h1> 🛒 Ecommerce</h1>
       </div>
       <div className="navlinks ">
+        <SearchInput></SearchInput>
         <NavLink style={{ textDecoration: "none" }} to="/" className="li">
           <li>Home</li>
         </NavLink>
