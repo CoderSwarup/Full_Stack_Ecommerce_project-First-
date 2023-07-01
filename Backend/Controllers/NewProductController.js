@@ -1,5 +1,6 @@
 import slugify from "slugify";
 import NewProductModelModel from "../Models/NewProductModel.model.js";
+import categoryModel from "../Models/category.model.js";
 
 // Create a Product Controller
 export const newCreateProductController = (req, res) => {
@@ -390,6 +391,30 @@ export const RelatedPrductController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Error While Fetching Related Products",
+      error: error.message,
+    });
+  }
+};
+
+//Category Based Product
+export const CategoryBasedController = async (req, res) => {
+  try {
+    const { slug } = req.params;
+    const category = await categoryModel.findOne({ slug });
+    // console.log(category);
+    const products = await NewProductModelModel.find({
+      category: category._id,
+    }).select("-photo");
+
+    res.status(200).send({
+      success: true,
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error While Fetching Category Based Related Products",
       error: error.message,
     });
   }

@@ -40,6 +40,7 @@ export default defineConfig({
       "/api/v1/products/product-page": "http://localhost:4000",
       "/api/v1/products/search": "http://localhost:4000",
       "/api/v1/products/related-product": "http://localhost:4000",
+      "/api/v1/products/caterory-related": "http://localhost:4000",
     },
   },
 });

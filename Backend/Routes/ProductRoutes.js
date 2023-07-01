@@ -6,6 +6,7 @@ import express from "express";
 import { isadmin, requireSign } from "../Middleware/authMiddleware.js";
 
 import {
+  CategoryBasedController,
   DeleteDroductController,
   GetProducts,
   GetSingleproducts,
@@ -89,5 +90,8 @@ ProductRouter.get("/search/:keyword", SearchProductController);
 
 //Related Prduct
 ProductRouter.get("/related-product/:pid/:catid", RelatedPrductController);
+
+//Category related Product
+ProductRouter.get("/caterory-related/:slug", CategoryBasedController);
 
 export default ProductRouter;

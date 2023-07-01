@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 import { useAuth } from "../Context/AuthContext";
 import toast from "react-hot-toast";
 import SearchInput from "./SearchInput";
+import useCategory from "../Hooks/useCategory";
+
 export default function Navbar() {
   const [auth, setauth] = useAuth();
+  const categories = useCategory();
 
   const handlerLogout = () => {
     setauth({
@@ -27,9 +30,33 @@ export default function Navbar() {
         <NavLink style={{ textDecoration: "none" }} to="/" className="li">
           <li>Home</li>
         </NavLink>
-        <NavLink style={{ textDecoration: "none" }} to="/about" className="li">
-          <li>About</li>
-        </NavLink>
+
+        {/* Category filter */}
+        <div class="dropdown">
+          <NavLink
+            style={{ textDecoration: "none", color: "#000" }}
+            to="/"
+            className="li"
+          >
+            <span>Category ⬇️</span>
+          </NavLink>
+          <div class="dropdown-content">
+            {categories.map((data) => {
+              return (
+                <NavLink
+                  key={data._id}
+                  style={{ textDecoration: "none", color: "#000" }}
+                  to={`/category/${data.slug}`}
+                  className="li"
+                >
+                  <p style={{ fontSize: "15px", textAlign: "center" }}>
+                    {data.name}
+                  </p>
+                </NavLink>
+              );
+            })}{" "}
+          </div>
+        </div>
 
         <NavLink
           style={{ textDecoration: "none" }}
@@ -164,7 +191,7 @@ const Nav = styled.nav`
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: transparent;
+      background-color: #fff;
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       padding: 10px;
       z-index: 1;

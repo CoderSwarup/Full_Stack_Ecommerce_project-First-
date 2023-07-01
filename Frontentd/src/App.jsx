@@ -25,6 +25,7 @@ import Products from "./Pages/Admin/Products/Products";
 import UpdateProduct from "./Pages/Admin/Products/UpdateProduct";
 import SearchPage from "./Pages/SearchPage";
 import ProductsDetails from "./Pages/ProductsDetails";
+import Categories from "./Pages/Categories";
 function App() {
   const [auth, setauth] = useAuth();
 
@@ -38,7 +39,10 @@ function App() {
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/product/:slug" element={<ProductsDetails />}></Route>
           <Route path="/search" element={<SearchPage></SearchPage>}></Route>
-
+          <Route
+            path="/category/:slug"
+            element={<Categories></Categories>}
+          ></Route>
           {auth?.user?.role == 0 ? (
             <>
               {/* user Dashboard route */}
