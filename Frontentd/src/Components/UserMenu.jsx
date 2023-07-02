@@ -44,9 +44,9 @@ export default function UserMenu({ children }) {
 }
 
 const Menu = styled.div`
+  width: 100%;
   display: flex;
   gap: 80px;
-  margin: 10px 20px;
   padding: 20px;
 
   h1 {
@@ -86,10 +86,15 @@ const Menu = styled.div`
     font-size: 18px;
     font-weight: 600;
   } */
+
+  .left {
+    width: 90%;
+  }
 `;
 
 const DashRight = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 50px;
+  width: 15%;
 `;

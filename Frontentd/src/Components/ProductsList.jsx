@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import { useCart } from "../Context/CartContext";
+import { toast } from "react-hot-toast";
 export default function ProductsList({ Productlist }) {
+  const [cart, setcart] = useCart();
+
   return (
     <Wrapper>
       {Productlist?.length == 0 ? <h1>Not get Products</h1> : ""}
@@ -24,7 +28,20 @@ export default function ProductsList({ Productlist }) {
                     More Details
                   </Link>
                 </button>
-                <button>Add To Cart</button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setcart([...cart, data]);
+                    localStorage.setItem(
+                      "cart",
+                      JSON.stringify([...cart, data])
+                    );
+                    toast.success("Product Add To Cart");
+                    console.log(cart);
+                  }}
+                >
+                  Add To Cart
+                </button>
               </Button>
             </div>
           </Card>

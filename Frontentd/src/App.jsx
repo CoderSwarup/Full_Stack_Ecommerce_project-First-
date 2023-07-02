@@ -26,6 +26,7 @@ import UpdateProduct from "./Pages/Admin/Products/UpdateProduct";
 import SearchPage from "./Pages/SearchPage";
 import ProductsDetails from "./Pages/ProductsDetails";
 import Categories from "./Pages/Categories";
+import CartPage from "./Pages/Cart/CartPage";
 function App() {
   const [auth, setauth] = useAuth();
 
@@ -43,6 +44,7 @@ function App() {
             path="/category/:slug"
             element={<Categories></Categories>}
           ></Route>
+          <Route path="/cart" element={<CartPage />}></Route>
           {auth?.user?.role == 0 ? (
             <>
               {/* user Dashboard route */}

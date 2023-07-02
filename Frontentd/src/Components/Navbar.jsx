@@ -5,10 +5,12 @@ import { useAuth } from "../Context/AuthContext";
 import toast from "react-hot-toast";
 import SearchInput from "./SearchInput";
 import useCategory from "../Hooks/useCategory";
+import { useCart } from "../Context/CartContext";
 
 export default function Navbar() {
   const [auth, setauth] = useAuth();
   const categories = useCategory();
+  const [cart] = useCart();
 
   const handlerLogout = () => {
     setauth({
@@ -106,7 +108,7 @@ export default function Navbar() {
               to="/"
               className="li"
             >
-              <span>{auth?.user?.usename} ⬇️</span>
+              <span>{auth?.user?.username} ⬇️</span>
             </NavLink>
             <div class="dropdown-content">
               <NavLink
@@ -129,7 +131,9 @@ export default function Navbar() {
         )}
 
         <NavLink style={{ textDecoration: "none" }} to="/cart" className="li">
-          <li> Cart</li>
+          <li className="cartitem">
+            🛒 <span>{cart?.length}</span>
+          </li>
         </NavLink>
       </div>
     </Nav>
@@ -214,6 +218,21 @@ const Nav = styled.nav`
 
     .dropdown:hover .dropdown-content {
       display: block;
+    }
+  }
+  .cartitem {
+    /* background: red; */
+    margin-right: 5px;
+    position: relative;
+    span {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: red;
+      color: #fff;
+      padding: 3px;
+      font-size: 12px;
+      border-radius: 50%;
     }
   }
 `;
