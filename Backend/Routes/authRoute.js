@@ -4,6 +4,7 @@ import {
   LoginController,
   RegisterController,
   testController,
+  updateProfileController,
 } from "../Controllers/authcontroller.js";
 import { isadmin, requireSign } from "../Middleware/authMiddleware.js";
 
@@ -15,6 +16,9 @@ authrouter.post("/register", RegisterController);
 
 //Login request || POST METHOD
 authrouter.post("/login", LoginController);
+
+//Updateprofile
+authrouter.put("/update-profile", requireSign, updateProfileController);
 
 //Forgot password controller
 authrouter.post("/forgotpassword", ForgotpasswdController);

@@ -102,7 +102,7 @@ const LoginController = async (req, res) => {
       success: true,
       message: "Login successfully",
       user: {
-        usename: user.username,
+        username: user.username,
         email: user.email,
         phone: user.phone,
         address: user.address,
@@ -120,6 +120,47 @@ const LoginController = async (req, res) => {
   }
 };
 
+//update prodile
+
+export const updateProfileController = async (req, res) => {
+  try {
+    const { name, phone, address } = req.body;
+
+    // console.log();
+    if (phone.length < 10) {
+      return res.send({
+        success: false,
+        message: "Mobile number is Not Completed",
+      });
+    }
+    const user = await userModel.findById(req.user._id);
+
+    const updateuser = await userModel
+      .findByIdAndUpdate(
+        req.user._id,
+        {
+          username: name || user.username,
+          phone: phone || user.phone,
+          address: address || user.address,
+        },
+        { new: true }
+      )
+      .select("-password");
+
+    // console.log(user);
+    res.status(200).send({
+      success: true,
+      message: "Profile Updated",
+      updateuser,
+    });
+  } catch (error) {
+    res.status(201).send({
+      success: false,
+      message: "Something Went Wrong Please Try Again",
+      error,
+    });
+  }
+};
 //Forgotpassword Controller
 
 const ForgotpasswdController = async (req, res) => {

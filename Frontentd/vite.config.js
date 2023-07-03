@@ -43,6 +43,8 @@ export default defineConfig({
       "/api/v1/products/search": BASE_URL,
       "/api/v1/products/related-product": BASE_URL,
       "/api/v1/products/caterory-related": BASE_URL,
+      "/api/v1/products/braintree/token": BASE_URL,
+      "/api/v1/products/braintree/payment": BASE_URL,
     },
   },
 });

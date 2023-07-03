@@ -20,6 +20,10 @@ import {
   newCreateProductController,
 } from "../Controllers/NewProductController.js";
 import multer from "multer";
+import {
+  PaymentBraintreeController,
+  TokenBraintreeController,
+} from "../Controllers/PaymentController.js";
 
 const upload = multer({
   limits: { fileSize: 1024 * 1024 }, // 1MB
@@ -94,4 +98,14 @@ ProductRouter.get("/related-product/:pid/:catid", RelatedPrductController);
 //Category related Product
 ProductRouter.get("/caterory-related/:slug", CategoryBasedController);
 
+//Payments token Route
+
+ProductRouter.get("/braintree/token", TokenBraintreeController);
+
+//Payment route
+ProductRouter.post(
+  "/braintree/payment",
+  requireSign,
+  PaymentBraintreeController
+);
 export default ProductRouter;

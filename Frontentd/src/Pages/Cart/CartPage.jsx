@@ -1,12 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useCart } from "../../Context/CartContext";
 import { useAuth } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import axois from "axios";
+//payment
+import DropIn from "braintree-web-drop-in-react";
+import { toast } from "react-hot-toast";
+
 export default function CartPage() {
   const Navigate = useNavigate();
   const [cart, setcart] = useCart();
   const [auth] = useAuth();
+
+  //payment
+  const [clienttoken, setclienttoken] = useState("");
+  const [instanse, setinstanse] = useState("");
+  const [loading, setloading] = useState(false);
   let Total = 0;
 
   const RemoveCartItem = (id) => {
@@ -37,6 +47,47 @@ export default function CartPage() {
     return total;
   };
 
+  //get payment getway token
+  const getToken = async () => {
+    try {
+      const { data } = await axois.get("/api/v1/products/braintree/token");
+      console.log(data);
+      setclienttoken(data?.clientToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getToken();
+  }, [auth?.token]);
+
+  const handelPayment = async () => {
+    try {
+      setloading(true);
+      const { nonce } = await instanse.requestPaymentMethod();
+      const { data } = await axois.post(
+        `/api/v1/products/braintree/payment`,
+        {
+          nonce,
+          cart,
+        },
+        {
+          headers: {
+            Authorization: auth?.token,
+          },
+        }
+      );
+      setloading(false);
+      localStorage.removeItem("cart");
+      setcart([]);
+      Navigate("/dashboard/user/orders");
+      toast.success("Payment completed Succefully");
+    } catch (error) {
+      console.log(error);
+      setloading(false);
+    }
+  };
   return (
     <Wrapper>
       <div className="plists">
@@ -126,6 +177,33 @@ export default function CartPage() {
               </button>
             </>
           )}
+
+          <Payment>
+            {!clienttoken || !cart.length ? (
+              ""
+            ) : (
+              <>
+                <DropIn
+                  options={{
+                    authorization: clienttoken,
+                    paypal: {
+                      flow: "vault", // vault or checkout for the payment method selection page
+                    },
+                  }}
+                  onInstance={(instance) => setinstanse(instance)}
+                />
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handelPayment();
+                  }}
+                  disabled={!instanse ? true : false}
+                >
+                  {loading ? "Processing" : "Make Payment"}
+                </button>
+              </>
+            )}
+          </Payment>
         </AddressButton>
       </Checkout>
     </Wrapper>
@@ -225,4 +303,11 @@ const AddressButton = styled.div`
     outline: none;
     padding: 5px 10px;
   }
+  button:disabled {
+    opacity: 0.6;
+  }
+`;
+
+const Payment = styled.div`
+  margin: 10px 0;
 `;
