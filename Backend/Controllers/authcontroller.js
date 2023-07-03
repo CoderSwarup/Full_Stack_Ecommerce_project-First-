@@ -1,6 +1,6 @@
 import userModel from "../Models/user.model.js";
 import { comparePassword, hashPassword } from "../helper/authhelper.js";
-
+import orderModel from "../Models/order.model.js";
 //import json webtoken
 import JWT from "jsonwebtoken";
 
@@ -212,4 +212,57 @@ export {
   LoginController,
   testController,
   ForgotpasswdController,
+};
+
+//orders controller
+export const OrdersController = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({ buyer: req.user._id })
+      .populate("buyer")
+      .populate("products", "-photo");
+    res.json(orders);
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Error While Fetching Orders",
+    });
+  }
+};
+
+//all orders
+export const AllOrdersController = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find()
+      .populate("buyer", "username")
+      .populate("products", "name slug")
+      .sort({ createdAt: "-1" });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Error While Fetching Orders",
+    });
+  }
+};
+
+export const OrderStatusController = async (req, res) => {
+  try {
+    const { order_id } = req.params;
+    const { status } = req.body;
+
+    console.log(status, typeof status);
+    const orders = await orderModel.findByIdAndUpdate(
+      { _id: order_id },
+      { status: status },
+      { new: true }
+    );
+    res.json(orders);
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Error While Updating Order Status",
+    });
+  }
 };

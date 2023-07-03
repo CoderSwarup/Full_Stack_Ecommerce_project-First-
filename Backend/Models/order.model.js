@@ -8,22 +8,15 @@ const OrderSchema = mongoose.Schema(
         ref: "Products",
       },
     ],
-    payment: [],
+    payment: {},
     buyer: {
       type: mongoose.ObjectId,
       ref: "users",
     },
     status: {
       type: String,
-      default: "Order Process",
-      enum: [
-        "Not Process",
-        "Order Process",
-        "Processing",
-        "Shipped",
-        "Deliverd",
-        "Cancel",
-      ],
+      default: "Not Process",
+      enum: ["Not Process", "Processing", "Shipped", "Deliverd", "Cancel"],
     },
   },
   {

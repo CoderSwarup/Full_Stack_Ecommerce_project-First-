@@ -180,7 +180,7 @@ export default function CartPage() {
 
           <Payment>
             {!clienttoken || !cart.length ? (
-              ""
+              <h2>Wait For Payment Option</h2>
             ) : (
               <>
                 <DropIn

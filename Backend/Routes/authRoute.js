@@ -1,7 +1,10 @@
 import express from "express";
 import {
+  AllOrdersController,
   ForgotpasswdController,
   LoginController,
+  OrderStatusController,
+  OrdersController,
   RegisterController,
   testController,
   updateProfileController,
@@ -35,4 +38,19 @@ authrouter.get("/user-auth", requireSign, (req, res) => {
 authrouter.get("/admin-auth", requireSign, isadmin, (req, res) => {
   res.status(200).send({ ok: true });
 });
+
+//orders
+authrouter.get("/orders", requireSign, OrdersController);
+
+//all orders
+authrouter.get("/all-orders", requireSign, isadmin, AllOrdersController);
+
+//order status
+
+authrouter.put(
+  "/order-status/:order_id",
+  requireSign,
+  isadmin,
+  OrderStatusController
+);
 export default authrouter;

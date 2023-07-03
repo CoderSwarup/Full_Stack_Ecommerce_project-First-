@@ -27,6 +27,7 @@ import SearchPage from "./Pages/SearchPage";
 import ProductsDetails from "./Pages/ProductsDetails";
 import Categories from "./Pages/Categories";
 import CartPage from "./Pages/Cart/CartPage";
+import AdminOrders from "./Pages/Admin/Orders.jsx/AdminOrders";
 function App() {
   const [auth, setauth] = useAuth();
 
@@ -81,6 +82,7 @@ function App() {
                   path="update-products/:slug"
                   element={<UpdateProduct></UpdateProduct>}
                 ></Route>
+                <Route path="orders" element={<AdminOrders />}></Route>
                 <Route path="users" element={<AdminUsers></AdminUsers>}></Route>
               </Route>
             </>

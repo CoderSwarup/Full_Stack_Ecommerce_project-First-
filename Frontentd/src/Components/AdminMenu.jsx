@@ -9,7 +9,8 @@ export default function AdminMenu({ children }) {
     { no: 1, src: "create-category", name: "Create Category" },
     { no: 2, src: "create-products", name: "Create Products" },
     { no: 3, src: "products", name: "Products" },
-    { no: 4, src: "users", name: "Users" },
+    { no: 4, src: "orders", name: "Order Manage" },
+    { no: 5, src: "users", name: "Users" },
   ];
 
   const setBtnNo = (no) => {
@@ -90,7 +91,7 @@ const Menu = styled.div`
   } */
 
   .left {
-    width: 60%;
+    width: 90%;
   }
 `;
 

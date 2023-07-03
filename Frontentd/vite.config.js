@@ -45,6 +45,9 @@ export default defineConfig({
       "/api/v1/products/caterory-related": BASE_URL,
       "/api/v1/products/braintree/token": BASE_URL,
       "/api/v1/products/braintree/payment": BASE_URL,
+      "/api/v1/orders": BASE_URL,
+      "/api/v1/all-orders": BASE_URL,
+      "/api/v1/order-status": BASE_URL,
     },
   },
 });
