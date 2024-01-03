@@ -1,0 +1,28 @@
+// git branches 
+
+git branch ==> show all branches 
+git branch -a
+
+git branch -v => show branches with last commit 
+
+git branch <branch_name> ==> create a new branch
+git checkout -b <branch_name> => create new branch and seitch on it 
+
+git checkout  <branch_name> use to switch the branch
+
+git merge <branch_name> => use to merge two branches 
+
+git branch --merged => show merged branches
+
+
+
+git branch --no-merged => show unmerged branches
+git branch --unmerged 
+
+git branch --delete <branch_name> => use to delete branch after merge 
+NOTE : gives error when branch is not merge 
+git branch -d <branch_name>
+
+git branch -D <branch_name> => delete wihthout merge 
+
+
